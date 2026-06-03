@@ -1,0 +1,30 @@
+name: Pipeline DevOps
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Mostrar arquivos do projeto
+        run: ls -la
+
+      - name: Verificar Docker
+        run: docker --version
+
+      - name: Construir imagem Docker
+        run: docker build -t projeto-cloud .
+
+      - name: Finalizado
+        run: echo "Pipeline executado com sucesso!"
