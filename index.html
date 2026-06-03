@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroVerde Cooperativa — Soja, Milho e Agricultura Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1b5e3f; --green-d:#124430; --leaf:#3a8c5c;
+    --gold:#e0a82e; --cream:#f7f3e8; --soil:#5b4632;
+    --txt:#243027; --mut:#5d6b5f; --card:#fffdf6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--txt);font-family:"Mulish",system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 30px}
+  h1,h2,h3,.dsp{font-family:"Fraunces",Georgia,serif;line-height:1.1}
+  a{color:inherit;text-decoration:none}
+  nav{position:sticky;top:0;z-index:20;background:rgba(247,243,232,.9);backdrop-filter:blur(8px);border-bottom:1px solid #e3dcc7}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Fraunces";font-weight:700;font-size:1.22rem;color:var(--green)}
+  .leaf{width:30px;height:30px;color:var(--leaf)}
+  .nav-links{display:flex;gap:30px;font-size:.92rem;font-weight:600;color:var(--mut)}
+  .nav-links a:hover{color:var(--green)}
+  @media(max-width:780px){.nav-links{display:none}}
+  /* hero */
+  header{position:relative;padding:110px 0 130px;overflow:hidden;
+    background:radial-gradient(120% 90% at 50% 0%,#fbf8ee 0%,#eef1df 55%,#e3ecd3 100%)}
+  .blob{position:absolute;border-radius:46% 54% 60% 40%/52% 48% 52% 48%;filter:blur(2px);opacity:.5}
+  .b1{width:420px;height:420px;background:#cfe3c2;top:-120px;right:-110px;animation:fl 18s ease-in-out infinite}
+  .b2{width:300px;height:300px;background:#f1dca0;bottom:-130px;left:-90px;animation:fl 22s ease-in-out infinite reverse}
+  @keyframes fl{50%{transform:translateY(28px) scale(1.06)}}
+  header .wrap{position:relative}
+  .tag{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid #d8e3c8;color:var(--green);
+    font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:999px;margin-bottom:26px}
+  header h1{font-size:clamp(2.7rem,6.6vw,5rem);color:var(--green);font-weight:600}
+  header h1 em{color:var(--gold);font-style:italic}
+  .lede{max-width:600px;margin:24px 0 40px;color:var(--mut);font-size:1.12rem}
+  .cta{display:inline-flex;gap:10px;background:var(--green);color:var(--cream);font-weight:700;font-size:.95rem;
+    padding:16px 32px;border-radius:999px;transition:.2s}
+  .cta:hover{background:var(--green-d);transform:translateY(-2px)}
+  .reveal{opacity:0;transform:translateY(24px);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  /* stats */
+  .stats{margin-top:-66px;position:relative;z-index:5}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .st{background:var(--card);border:1px solid #e7e1cd;border-radius:18px;padding:28px 24px;
+    box-shadow:0 16px 40px -28px rgba(27,94,63,.5)}
+  .st b{font-family:"Fraunces";font-size:2.1rem;color:var(--green);display:block}
+  .st small{color:var(--mut);font-size:.86rem}
+  @media(max-width:820px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+  section{padding:96px 0}
+  .eyebrow{color:var(--gold);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem;margin-bottom:12px}
+  h2{font-size:clamp(2rem,4.4vw,3.1rem);color:var(--green);font-weight:600;margin-bottom:16px}
+  .lead{color:var(--mut);max-width:640px;font-size:1.05rem}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+  @media(max-width:880px){.grid3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid #e7e1cd;border-radius:20px;padding:34px;transition:.25s}
+  .card:hover{transform:translateY(-5px);box-shadow:0 24px 50px -30px rgba(27,94,63,.4)}
+  .ic{width:46px;height:46px;border-radius:14px;background:#e8f1df;color:var(--green);display:grid;place-items:center;margin-bottom:18px}
+  .card h3{font-size:1.3rem;margin-bottom:8px}
+  .card p{color:var(--mut);font-size:.96rem}
+  .pitch{background:var(--green);color:var(--cream);border-radius:30px;padding:72px 60px;text-align:center;position:relative;overflow:hidden}
+  .pitch h2{color:var(--cream)}
+  .pitch p{max-width:620px;margin:14px auto 0;color:#d4e5d6;font-size:1.08rem}
+  .grain{position:absolute;inset:0;opacity:.07;background-image:radial-gradient(circle,#fff 1px,transparent 1.4px);background-size:22px 22px}
+  footer{background:var(--green-d);color:#cfe0d2;padding:64px 0 0}
+  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;padding-bottom:46px}
+  @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
+  footer h4{font-family:"Fraunces";color:var(--gold);font-size:1.05rem;margin-bottom:14px}
+  footer p,footer a{display:block;font-size:.92rem;margin-bottom:7px;color:#bcd2c0}
+  .infra{border-top:1px solid #1c5a3d;background:#0e3324;font-family:"Mulish";font-size:.82rem}
+  .infra .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;padding:15px 30px;color:#9fc0a6}
+  .badge{background:var(--gold);color:#3a2c0c;padding:3px 11px;border-radius:6px;font-weight:700}
+  .dot{width:8px;height:8px;border-radius:50%;background:#7fe6a0;display:inline-block;margin-right:7px;box-shadow:0 0 8px #7fe6a0;animation:bl 1.6s infinite}
+  @keyframes bl{50%{opacity:.35}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">
+    <svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M5 21c0-9 6-16 16-16 0 9-6 16-16 16zm2-3c5-1 8-5 9-9-5 1-8 5-9 9z"/></svg>
+    AgroVerde
+  </div>
+  <div class="nav-links"><a href="#coop">A cooperativa</a><a href="#digital">Agricultura digital</a><a href="#num">Números</a><a href="#contato">Contato</a></div>
+</div></nav>
+
+<header>
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap reveal">
+    <span class="tag">🌱 Cooperativa de grãos · Desde 1995</span>
+    <h1>Do solo ao dado:<br>colheita <em>inteligente</em>.</h1>
+    <p class="lede">Cooperativa de soja e milho que une a experiência de 320 produtores cooperados à agricultura de precisão em mais de 8.500 hectares. Cascavel, Paraná.</p>
+    <a href="#digital" class="cta">Nossa jornada digital →</a>
+  </div>
+</header>
+
+<div class="stats"><div class="wrap">
+  <div class="st"><b>320</b><small>produtores cooperados</small></div>
+  <div class="st"><b>8.500 ha</b><small>áreas monitoradas</small></div>
+  <div class="st"><b>220 mil t</b><small>grãos processados/ano</small></div>
+  <div class="st"><b>R$ 480mi</b><small>faturamento 2024</small></div>
+</div></div>
+
+<section id="coop"><div class="wrap">
+  <div class="eyebrow">Quem somos</div>
+  <h2>Uma cooperativa que cresce junto</h2>
+  <p class="lead">Fundada em 1995, a AgroVerde reúne produtores de soja e milho do oeste do Paraná, com escritório central, três unidades armazenadoras e assistência técnica em campo.</p>
+  <div class="grid3">
+    <div class="card"><div class="ic"><svg width="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6-5.5-3-5.5 3 1-6L3 8.9 9 8z"/></svg></div><h3>Soja & milho</h3><p>Produção monitorada por sensores de solo, telemetria de máquinas e mapeamento por drones.</p></div>
+    <div class="card"><div class="ic"><svg width="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4 20V8l8-5 8 5v12h-6v-6H10v6z"/></svg></div><h3>3 armazéns</h3><p>Recebimento, secagem e armazenagem de grãos com gestão integrada às unidades.</p></div>
+    <div class="card"><div class="ic"><svg width="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11h5v-2h-4V6h-2v7z"/></svg></div><h3>App do cooperado</h3><p>Consulta de produção e cotação na palma da mão — informação que aproxima o campo da decisão.</p></div>
+  </div>
+</div></section>
+
+<section id="digital"><div class="wrap">
+  <div class="pitch">
+    <div class="grain"></div>
+    <div class="eyebrow" style="color:#f1dca0">Agricultura 4.0</div>
+    <h2>Tecnologia que respeita a terra</h2>
+    <p>Sensores de umidade e nutrientes, telemetria em 28 colheitadeiras e 22 plantadeiras e ~1,8 TB de dados gerados por mês. O próximo passo é transformar esse volume em decisões mais simples para cada cooperado.</p>
+  </div>
+</div></section>
+
+<section id="num"><div class="wrap">
+  <div class="eyebrow">Indicadores</div>
+  <h2>A cooperativa em números</h2>
+  <div class="grid3">
+    <div class="card"><h3 style="color:var(--green)">1,8 TB</h3><p>Volume de dados coletados por mês em campo.</p></div>
+    <div class="card"><h3 style="color:var(--green)">9</h3><p>Profissionais na equipe de tecnologia.</p></div>
+    <div class="card"><h3 style="color:var(--green)">40%</h3><p>Cooperados já ativos no aplicativo oficial.</p></div>
+  </div>
+</div></section>
+
+<footer id="contato">
+  <div class="wrap fgrid">
+    <div><h4>AgroVerde Cooperativa</h4><p>Cooperativa de produtores de soja e milho do oeste do Paraná, comprometida com agricultura digital e sustentável.</p><p>Cascavel · Paraná · Brasil</p></div>
+    <div><h4>Unidades</h4><a>Escritório central</a><a>Armazém Norte · Sul · Leste</a></div>
+    <div><h4>Contato</h4><a>cooperado@agroverde.exemplo</a><a>+55 45 0000-0000</a></div>
+  </div>
+  <div class="infra"><div class="wrap">
+    <span><span class="dot"></span>Servido por <span class="badge" id="host">web-srv-01</span></span>
+    <span>Uptime: <span id="up">00:00:00</span></span>
+    <span>AgroVerde · ambiente de demonstração</span>
+  </div></div>
+</footer>
+
+<script>
+  /* >>> ALUNO: altere INSTANCE_LABEL em CADA instância EC2 para visualizar o Auto Scaling pelo balanceador <<< */
+  const INSTANCE_LABEL = "web-srv-01";
+  document.getElementById("host").textContent = INSTANCE_LABEL;
+  document.title = "AgroVerde · " + INSTANCE_LABEL;
+  const t0=Date.now();
+  setInterval(()=>{const s=(Date.now()-t0)/1000|0;
+    document.getElementById("up").textContent=
+    [s/3600|0,s/60%60|0,s%60].map(n=>String(n).padStart(2,'0')).join(':');},1000);
+</script>
+</body>
+</html>
