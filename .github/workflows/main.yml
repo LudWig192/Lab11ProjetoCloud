@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,5 +26,30 @@ jobs:
       - name: Construir imagem Docker
         run: docker build -t projeto-cloud .
 
+      - name: Testar container
+        run: |
+          docker run -d -p 8080:80 --name teste projeto-cloud
+          sleep 5
+          curl http://localhost:8080
+
       - name: Finalizado
-        run: echo "Pipeline executado com sucesso!"
+        run: echo "CI executado com sucesso!"
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Deploy na EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/agroverde || mkdir ~/agroverde && cd ~/agroverde
+
+            rm -rf *
