@@ -1,55 +1,42 @@
-name: Pipeline DevOps
+name: CI-CD AgroVerde
 
 on:
   push:
     branches:
       - main
 
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  build-and-test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4
-
-      - name: Mostrar arquivos do projeto
-        run: ls -la
 
       - name: Verificar Docker
         run: docker --version
 
       - name: Construir imagem Docker
-        run: docker build -t projeto-cloud .
+        run: docker build -t agroverde .
 
-      - name: Testar container
-        run: |
-          docker run -d -p 8080:80 --name teste projeto-cloud
-          sleep 5
-          curl http://localhost:8080
-
-      - name: Finalizado
-        run: echo "CI executado com sucesso!"
-
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Clonar repositório
-        uses: actions/checkout@v4
-
-      - name: Deploy na EC2 via SSH
-        uses: appleboy/ssh-action@master
+      - name: Copiar index.html para EC2
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "index.html"
+          target: "/tmp"
+
+      - name: Atualizar site na EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/agroverde || mkdir ~/agroverde && cd ~/agroverde
+            sudo cp /tmp/index.html /var/www/html/index.html
+            sudo systemctl restart nginx
 
-            rm -rf *
+      - name: Finalizado
+        run: echo "Deploy realizado com sucesso!"
